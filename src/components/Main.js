@@ -5,24 +5,37 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
+import WebSite from './WebSite';
+import Game from './Game';
+
+import renderCanvas from '../gameCode.js';
+
 import Dimensions from 'Dimensions';
 
 const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 const Main = React.createClass({
   onPlayGame() {
-    console.log('new game')
+    this.props.navigator.push({
+      title: 'Kool Game',
+      component: Game,
+      passProps: {
+        render: renderCanvas,
+        height: deviceHeight,
+        width: deviceWidth,
+        message: 'Kanvas!'
+      },
+    });
   },
   onViewWeb() {
-    console.log('web view')
-    this.props.navigator.push(nextRoute);
+    this.props.navigator.push({
+      title: 'Swaggity',
+      component: WebSite
+    });
   },
   _handleBackButtonPress() {
     this.props.navigator.pop();
-  },
-  _handleNextButtonPress() {
-    //this.props.navigator.push(nextRoute);
-    console.log('next route')
   },
   render() {
     return (
@@ -39,10 +52,10 @@ const Main = React.createClass({
             width: deviceWidth - 20,
             height: deviceWidth - 20,
           }]}>
-          <TouchableHighlight style={styles.button} onPress={this.onNewGame}>
+          <TouchableHighlight style={styles.button} onPress={this.onViewWeb}>
             <Text style={styles.btnText}>Web</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.onNewGame}>
+          <TouchableHighlight style={styles.button} onPress={this.onPlayGame}>
             <Text style={styles.btnText}>Game</Text>
           </TouchableHighlight>
         </View>

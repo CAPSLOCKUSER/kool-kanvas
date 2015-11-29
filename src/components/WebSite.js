@@ -15,7 +15,7 @@ var DISABLED_WASH = 'rgba(255,255,255,0.25)';
 
 var TEXT_INPUT_REF = 'urlInput';
 var WEBVIEW_REF = 'webview';
-var DEFAULT_URL = 'https://lensa.com/talent/#/register';
+var DEFAULT_URL = 'https://lensa.com/talent/';
 
 var WebViewExample = React.createClass({
 
@@ -30,49 +30,9 @@ var WebViewExample = React.createClass({
     };
   },
 
-  inputText: '',
-
-  handleTextInputChange: function(event) {
-    this.inputText = event.nativeEvent.text;
-  },
-
   render: function() {
-    this.inputText = this.state.url;
-
     return (
       <View style={[styles.container]}>
-        {/*<View style={[styles.addressBarRow]}>
-          <TouchableOpacity
-            onPress={this.goBack}
-            style={this.state.backButtonEnabled ? styles.navButton : styles.disabledButton}>
-            <Text>
-               {'<'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.goForward}
-            style={this.state.forwardButtonEnabled ? styles.navButton : styles.disabledButton}>
-            <Text>
-              {'>'}
-            </Text>
-          </TouchableOpacity>
-          <TextInput
-            ref={TEXT_INPUT_REF}
-            autoCapitalize="none"
-            defaultValue={this.state.url}
-            onSubmitEditing={this.onSubmitEditing}
-            onChange={this.handleTextInputChange}
-            clearButtonMode="while-editing"
-            style={styles.addressBarTextInput}
-          />
-          <TouchableOpacity onPress={this.pressGoButton}>
-            <View style={styles.goButton}>
-              <Text>
-                 Go!
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>*/}
         <WebView
           ref={WEBVIEW_REF}
           automaticallyAdjustContentInsets={false}
@@ -84,23 +44,8 @@ var WebViewExample = React.createClass({
           startInLoadingState={true}
           scalesPageToFit={this.state.scalesPageToFit}
         />
-        {/*<View style={styles.statusBar}>
-          <Text style={styles.statusBarText}>{this.state.status}</Text>
-        </View>*/}
       </View>
     );
-  },
-
-  goBack: function() {
-    this.refs[WEBVIEW_REF].goBack();
-  },
-
-  goForward: function() {
-    this.refs[WEBVIEW_REF].goForward();
-  },
-
-  reload: function() {
-    this.refs[WEBVIEW_REF].reload();
   },
 
   onShouldStartLoadWithRequest: function(event) {
@@ -117,23 +62,6 @@ var WebViewExample = React.createClass({
       loading: navState.loading,
       scalesPageToFit: true
     });
-  },
-
-  onSubmitEditing: function(event) {
-    this.pressGoButton();
-  },
-
-  pressGoButton: function() {
-    var url = this.inputText.toLowerCase();
-    if (url === this.state.url) {
-      this.reload();
-    } else {
-      this.setState({
-        url: url,
-      });
-    }
-    // dismiss keyoard
-    this.refs[TEXT_INPUT_REF].blur();
   },
 
 });
@@ -193,16 +121,6 @@ var styles = StyleSheet.create({
     borderColor: 'transparent',
     borderRadius: 3,
     alignSelf: 'stretch',
-  },
-  statusBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 5,
-    height: 22,
-  },
-  statusBarText: {
-    color: 'white',
-    fontSize: 13,
   },
   spinner: {
     width: 20,
