@@ -7,6 +7,7 @@ import React, {
 } from 'react-native';
 
 import Main from './src/components/Main';
+import WebSite from './src/components/WebSite';
 
 const lfc = React.createClass({
 
@@ -16,7 +17,7 @@ const lfc = React.createClass({
         style={styles.container}
         initialRoute={{
           title: 'Yolo World',
-          component: Main
+          component: WebSite
         }}
       />
     );

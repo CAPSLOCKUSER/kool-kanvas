@@ -15,6 +15,14 @@ const Main = React.createClass({
   },
   onViewWeb() {
     console.log('web view')
+    this.props.navigator.push(nextRoute);
+  },
+  _handleBackButtonPress() {
+    this.props.navigator.pop();
+  },
+  _handleNextButtonPress() {
+    //this.props.navigator.push(nextRoute);
+    console.log('next route')
   },
   render() {
     return (
